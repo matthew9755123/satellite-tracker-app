@@ -1,0 +1,13 @@
+Scene
+    -initilizes the base scene, brings in earth and satellite models
+    -exports to App.jsx
+Earth
+    -initilizes earth model
+    -exports to Scene
+Satellite Renderer
+    -uses the data from TLEData to render all the satellites 
+    -exports to Scene
+TLEData
+    -fetches the data from the api
+    -stores the data in some kind of data structure
+    -exports to Satellite Renderer
