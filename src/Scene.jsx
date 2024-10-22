@@ -11,7 +11,7 @@ function Scene() {
     const camera = new THREE.PerspectiveCamera(
       50,
       window.innerWidth / window.innerHeight,
-      1,
+      .1,
       1000
     );
     camera.position.z = 5;
@@ -22,23 +22,27 @@ function Scene() {
       antialias: true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
     renderer.setPixelRatio(window.devicePixelRatio);
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enablePan = false;
-    controls.enableZoom = false;
+    controls.enableZoom = true;
+    controls.minDistance = 1.1;
+    controls.maxDistance = 10;
 
     const earthGroup = new THREE.Group();
     scene.add(earthGroup);
 
     const earthMesh = Earth();
-    scene.add(earthMesh);
+    earthGroup.add(earthMesh);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.09);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xffffff, 1);
-    sunLight.position.set(5, 0, 5);
+    const sunLight = new THREE.DirectionalLight(0xffffff, 2);
+    sunLight.position.set(3, 1, 6);
     scene.add(sunLight);
 
     renderer.shadowMap.enabled = true;
@@ -56,9 +60,11 @@ function Scene() {
     window.addEventListener('resize', onWindowResize, false);
 
     const animate = () => {
-      earthGroup.rotation.y += 0;
       renderer.render(scene, camera);
+      const distance = camera.position.z;
+      earthGroup.rotation.y += 0.000;
       requestAnimationFrame(animate);
+  
     };
     animate();
 

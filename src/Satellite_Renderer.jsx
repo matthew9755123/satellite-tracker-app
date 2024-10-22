@@ -14,37 +14,53 @@ const calcPosFromLatLonRad = (lat, lon, radius) => {
 };
 
 const SatelliteRenderer = async (earthGroup) => {
-    const satelliteMeshes = {};
+    const satellitePositions = [];
     const tleData = await fetchBulkTLEData();
+    const pointCount = Object.keys(tleData).length;
+
+    // Create buffer geometry for satellite positions
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(pointCount * 3); // 3 components per point (x, y, z)
+
+    const loader = new THREE.TextureLoader();
+    // Create material for the point cloud
+    const material = new THREE.PointsMaterial({
+        map: loader.load('src/assets/satellite-dot.png'),
+        transparent: true,
+        size: 0.02,
+        depthWrite: false,
+    });
+
+    // Create the points object and add it to the scene
+    const pointCloud = new THREE.Points(geometry, material);
+    earthGroup.add(pointCloud);
 
     const updateSatellitePositions = () => {
         const now = Date.now();
 
+        let i = 0;
         Object.keys(tleData).forEach(satelliteId => {
             const latLonObj = getLatLngObj(tleData[satelliteId], now);
             if (latLonObj) {
-                const { lat, lng} = latLonObj;
-                const newPosition = calcPosFromLatLonRad(lat, lng, 1.1);
-                
-                if (!satelliteMeshes[satelliteId]) {
-                    const dotGeo = new THREE.SphereGeometry(0.005, 25, 25);
-                    const dotMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff });
-                    const dotMesh = new THREE.Mesh(dotGeo, dotMaterial);
+                const { lat, lng } = latLonObj;
+                const newPosition = calcPosFromLatLonRad(lat, lng, 1.05);
 
-                    satelliteMeshes[satelliteId] = dotMesh;
-                    earthGroup.add(dotMesh);
-                }
-
-                satelliteMeshes[satelliteId].position.set(
-                    newPosition[0], newPosition[1], newPosition[2]
-                );
+                // Set the new positions in the buffer array
+                positions[i * 3] = newPosition[0];
+                positions[i * 3 + 1] = newPosition[1];
+                positions[i * 3 + 2] = newPosition[2];
+                i++;
             }
         });
+
+        // Update the positions attribute of the geometry
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.attributes.position.needsUpdate = true; // Mark the attribute for update
     };
 
     updateSatellitePositions();
     
-    setInterval(updateSatellitePositions, 2000);
+    setInterval(updateSatellitePositions, 100);
 };
 
 export default SatelliteRenderer;

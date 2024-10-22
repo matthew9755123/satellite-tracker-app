@@ -5,6 +5,7 @@ export const fetchBulkTLEData = async () => {
         const response = await fetch(
             'https://celestrak.com/NORAD/elements/gp.php?GROUP=active&FORMAT=TLE'
         );
+        console.log("DATA FETCHED");
         const data = await response.text();
         const lines = data.split('\n').filter(line => line.trim() !== '');
 
