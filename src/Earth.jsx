@@ -4,13 +4,13 @@ function Earth() {
     const loader = new THREE.TextureLoader();
     const geometry = new THREE.SphereGeometry(1, 64, 64);
     const material = new THREE.MeshStandardMaterial({
-        map: loader.load('src/assets/2_no_clouds_16k.jpg'),
+        map: loader.load('src\assets\earth-spacex.jpg'),
     });
 
     const earthMesh = new THREE.Mesh(geometry, material);
 
     const lightsMaterial = new THREE.MeshStandardMaterial({
-        map: loader.load('src/assets/earthlights16k.jpsg'),
+        map: loader.load('src/assets/earthlights16k.jpg'),
         transparent: true,
         blending: THREE.AdditiveBlending,
     });

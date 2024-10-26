@@ -27,10 +27,12 @@ function Scene() {
     renderer.setPixelRatio(window.devicePixelRatio);
 
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enablePan = false;
     controls.enableZoom = true;
     controls.minDistance = 1.1;
     controls.maxDistance = 10;
+    controls.rotateSpeed = 1;
+    controls.enableDamping = true;
+    controls.dampingFactor = .75;
 
     const earthGroup = new THREE.Group();
     scene.add(earthGroup);
@@ -41,7 +43,7 @@ function Scene() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xffffff, 2);
+    const sunLight = new THREE.DirectionalLight(0xffffff, 5);
     sunLight.position.set(3, 1, 6);
     scene.add(sunLight);
 
@@ -62,9 +64,9 @@ function Scene() {
     const animate = () => {
       renderer.render(scene, camera);
       const distance = camera.position.z;
-      earthGroup.rotation.y += 0.000;
+      earthGroup.rotation.y += 0.0;
+      controls.update();
       requestAnimationFrame(animate);
-  
     };
     animate();
 
