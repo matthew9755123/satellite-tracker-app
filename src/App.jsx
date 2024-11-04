@@ -1,11 +1,16 @@
-import React from "react";
-import Scene from'./Scene';
+import React, { useState } from "react";
+import { BrowserRouter } from "react-router-dom"
+import Scene from './components/Rendering/Scene';
+import Sidebar from "./components/UI/Sidebar";
 
 function App() {
   return (
-    <div>
-      <Scene />
-    </div>
+    <BrowserRouter>
+      <div>
+        <Scene />
+        <Sidebar />
+      </div>
+    </BrowserRouter>
   );
 }
 
