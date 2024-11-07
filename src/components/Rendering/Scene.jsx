@@ -13,7 +13,7 @@ function Scene() {
       0.01,
       1000
     );
-    camera.position.z = 4;
+    camera.position.z = 2;
 
     const canvas = document.getElementById('myThreeJsCanvas');
     const renderer = new THREE.WebGLRenderer({ canvas });
