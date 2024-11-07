@@ -25,6 +25,7 @@ A web-based satellite tracking tool using Three.js for 3D visualization and Cele
 ### **Technical Improvements**
 * **Backend Development:** Create a backend to cache and periodically update TLE data, reducing the frequency of API calls to CelesTrak (updated every 12 hours).
 *Accurate Solar Positioning: Integrate accurate sun positioning based on the current time to ensure realistic shadow casting on Earth.
+* **Loading Screen/Bar:** Add a loading screen while the earth, satellites and TLE data is all gathered and rendered. 
 * **Interactive Satellite Information:** Enable satellite selection to display detailed information about each satellite.
 * **Earth Spin and Sun Brightness Controls:** Add controls to adjust the Earth’s rotation speed and the brightness of the sun.
 * **Orbital Heights:** Display satellites at varying altitudes according to their actual orbital heights instead of placing them all at the same level.
