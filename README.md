@@ -1,13 +1,10 @@
 
-Memory updated
-Here's the README with the additional task of setting satellites at varying orbital heights:
-
 # **🌌 Satellite Tracker**
 A web-based satellite tracking tool using Three.js for 3D visualization and CelesTrak’s NORAD TLE data for accurate satellite positions. This project renders real-time satellite orbits and positions on a 3D globe, using point clouds to handle high-performance rendering even with multiple satellites.
 
 ## **✨ Features**
 * **Real-Time Tracking:** Fetches up-to-date TLE (Two-Line Element) data from CelesTrak, provided by NORAD.
-3D Globe Rendering: Projects satellite positions onto a 3D Earth using Three.js.
+* **3D Globe Rendering:** Projects satellite positions onto a 3D Earth using Three.js.
 * **Efficient Performance:** Leverages point clouds to ensure smooth rendering even when displaying large numbers of satellites.
 
 ## **🚀 Technologies**
