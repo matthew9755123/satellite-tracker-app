@@ -16,10 +16,7 @@ function Scene() {
     camera.position.z = 4;
 
     const canvas = document.getElementById('myThreeJsCanvas');
-
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-    });
+    const renderer = new THREE.WebGLRenderer({ canvas });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -33,6 +30,21 @@ function Scene() {
     controls.rotateSpeed = 1;
     controls.enableDamping = true;
     controls.dampingFactor = 0.75;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 1.25;
+
+    let autoRotateTimeout;
+
+    controls.addEventListener('start', () => {
+      controls.autoRotate = false;
+      clearTimeout(autoRotateTimeout);
+    });
+
+    controls.addEventListener('end', () => {
+      autoRotateTimeout = setTimeout(() => {
+        controls.autoRotate = true;
+      }, 7000); 
+    });
 
     const earthGroup = new THREE.Group();
     scene.add(earthGroup);
@@ -71,6 +83,7 @@ function Scene() {
 
     return () => {
       window.removeEventListener('resize', onWindowResize);
+      clearTimeout(autoRotateTimeout);
     };
   }, []);
 
