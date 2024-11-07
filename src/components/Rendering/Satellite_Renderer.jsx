@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { getLatLngObj } from 'tle.js';
 import { fetchBulkTLEData } from './TLEData';
+import { setGroup } from './config';
 
 const calcPosFromLatLonRad = (lat, lon, radius) => {
     const phi = (90 - lat) * (Math.PI / 180);
@@ -17,8 +18,13 @@ let tleData = await fetchBulkTLEData('last-30-days');
 let pointCount = Object.keys(tleData).length;
 let positions = new Float32Array(pointCount * 3);
 
-export const updateGroup = async (group) => {
-    tleData = await fetchBulkTLEData(group);
+export const updateGroup = async (newGroup) => {
+    setGroup(newGroup)
+
+    console.log(`Loading:  ${newGroup}`);
+    tleData = await fetchBulkTLEData();
+    console.log(`${newGroup} loaded`);
+    
     pointCount = Object.keys(tleData).length;
     positions = new Float32Array(pointCount * 3);
 };

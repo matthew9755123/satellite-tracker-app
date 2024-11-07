@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { updateGroup } from '../Rendering/Satellite_Renderer';
+import { getGroup } from '../Rendering/config.js';
 
 function Sidebar() {
     const navItems = [
@@ -19,7 +20,7 @@ function Sidebar() {
 
     return (
         <div>
-            <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-center text-white text-sm bg-gray-900 bg-opacity-80 px-5 py-2 rounded-lg shadow-lg text-6xl">
+            <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-center text-white bg-gray-900 bg-opacity-80 px-5 py-2 rounded-lg shadow-lg text-4xl">
                 Satellite Tracker
             </div>
             <div className="sidebar h-screen w-[250px] fixed top-0 left-0 bg-gray-800 text-white overflow-y-auto py-5">
@@ -36,7 +37,7 @@ function Sidebar() {
                 </div>
             </div>
             <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 text-center text-white text-sm bg-gray-900 bg-opacity-80 px-5 py-2 rounded-lg shadow-lg text-xl">
-                Currently Displaying: <span className="text-blue-400 uppercase italic font-mono font-extrabold text-2xl ">{group}</span>.
+                Currently Displaying: <span className="text-blue-400 uppercase italic font-mono font-extrabold text-2xl ">{getGroup()}</span>.
             </div>
         </div>
     );

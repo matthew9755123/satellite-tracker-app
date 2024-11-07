@@ -40,11 +40,11 @@ function Scene() {
     const earthMesh = Earth();
     earthGroup.add(earthMesh);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xffffff, 1.75);
-    sunLight.position.set(3, 1, 6);
+    const sunLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    sunLight.position.set(-50, 0, 6);
     scene.add(sunLight);
 
     renderer.shadowMap.enabled = true;
