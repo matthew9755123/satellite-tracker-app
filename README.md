@@ -23,6 +23,7 @@ A web-based satellite tracking tool using Three.js for 3D visualization and Cele
 
 ## **📅 Current Tasks**
 ### **Technical Improvements**
+* **Fix Zoom Bug:** Wehn zooming in too close to the Earth, the satellites disappear. This is a rendering issue.
 * **Backend Development:** Create a backend to cache and periodically update TLE data, reducing the frequency of API calls to CelesTrak (updated every 12 hours).
 *Accurate Solar Positioning: Integrate accurate sun positioning based on the current time to ensure realistic shadow casting on Earth.
 * **Loading Screen/Bar:** Add a loading screen while the earth, satellites and TLE data is all gathered and rendered. 
