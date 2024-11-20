@@ -10,7 +10,7 @@ function Sidebar() {
         'sbas', 'nnss', 'musson', 'science', 'geodetic', 'engineering', 'education', 'military', 'radar', 'cubesat'
     ];
 
-    const [group, setGroup] = useState('last-30-days');
+    const [group, setGroup] = useState('');
 
     const handleClick = (newGroup) => {
         console.log('Group:', newGroup, "selected.");
@@ -20,8 +20,8 @@ function Sidebar() {
 
     return (
         <div>
-            <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-center text-white bg-gray-900 bg-opacity-80 px-5 py-2 rounded-lg shadow-lg text-4xl">
-                Satellite Tracker
+            <div className="absolute top-5 left-1/2 transform -translate-x-1/2 text-center text-white  px-5 py-2 rounded-lg shadow-lg text-6xl font-semibold">
+                SAELLITE TRACKER
             </div>
             <div className="sidebar h-screen w-[250px] fixed top-0 left-0 bg-gray-800 text-white overflow-y-auto py-5">
        

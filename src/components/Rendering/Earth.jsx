@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 function Earth() {
     const loader = new THREE.TextureLoader();
-    const geometry = new THREE.SphereGeometry(1, 64, 64);
+    const geometry = new THREE.SphereGeometry(1, 128, 128);
     const material = new THREE.MeshStandardMaterial({
         map: loader.load('assets/2_no_clouds_16k.jpg'),
     });

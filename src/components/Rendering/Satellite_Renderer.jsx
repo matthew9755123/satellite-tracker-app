@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { getLatLngObj } from 'tle.js';
 import { fetchBulkTLEData } from './TLEData';
 import { setGroup } from './config';
+import { getZoom } from './config.js';
 
 const calcPosFromLatLonRad = (lat, lon, radius) => {
     const phi = (90 - lat) * (Math.PI / 180);
@@ -14,12 +15,22 @@ const calcPosFromLatLonRad = (lat, lon, radius) => {
     return [x, y, z];
 };
 
-let tleData = await fetchBulkTLEData('last-30-days');
-let pointCount = Object.keys(tleData).length;
-let positions = new Float32Array(pointCount * 3);
+let tleData = {};
+let positions = new Float32Array(0);
+let pointCount = 0;
+
+const initializeData = () => {
+    fetchBulkTLEData('').then(data => {
+        tleData = data;
+        pointCount = Object.keys(tleData).length;
+        positions = new Float32Array(pointCount * 3);
+    });
+};
+
+initializeData();
 
 export const updateGroup = async (newGroup) => {
-    setGroup(newGroup)
+    setGroup(newGroup);
 
     console.log(`Loading:  ${newGroup}`);
     tleData = await fetchBulkTLEData();
@@ -36,10 +47,17 @@ export const SatelliteRenderer = (earthGroup) => {
     const material = new THREE.PointsMaterial({
         map: loader.load('assets/satellite-dot.png'),
         transparent: true,
-        size: 0.02,
-        depthWrite: false
+        size: 0.0175,
+        depthTest: true
     });
     const pointCloud = new THREE.Points(geometry, material);
+    //pointCloud.frustumCulled = false;
+    geometry.computeBoundingSphere();
+    geometry.boundingSphere.radius *= 0.6; 
+
+
+    console.log('Bounding Sphere:', geometry.boundingSphere);
+
     earthGroup.add(pointCloud);
 
     setInterval(() => updateSatellitePositions(), 500);
@@ -53,6 +71,7 @@ const updateSatellitePositions = async () => {
     Object.keys(tleData).forEach(satelliteId => {
         const latLonObj = getLatLngObj(tleData[satelliteId], now);
         if (latLonObj) {
+
             const { lat, lng } = latLonObj;
             const newPosition = calcPosFromLatLonRad(lat, lng, 1.01);
 

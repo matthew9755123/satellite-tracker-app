@@ -27,36 +27,21 @@ function Scene() {
     controls.enableZoom = true;
     controls.minDistance = 1.1;
     controls.maxDistance = 10;
-    controls.rotateSpeed = 1;
     controls.enableDamping = true;
     controls.dampingFactor = 0.75;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.25;
-
-    let autoRotateTimeout;
-
-    controls.addEventListener('start', () => {
-      controls.autoRotate = false;
-      clearTimeout(autoRotateTimeout);
-    });
-
-    controls.addEventListener('end', () => {
-      autoRotateTimeout = setTimeout(() => {
-        controls.autoRotate = true;
-      }, 7000); 
-    });
 
     const earthGroup = new THREE.Group();
     scene.add(earthGroup);
 
     const earthMesh = Earth();
     earthGroup.add(earthMesh);
+    
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    sunLight.position.set(-50, 0, 6);
+    const sunLight = new THREE.DirectionalLight(0xffffff, 1.7);
+    sunLight.position.set(-25, 0, 6);
     scene.add(sunLight);
 
     renderer.shadowMap.enabled = true;
@@ -83,7 +68,6 @@ function Scene() {
 
     return () => {
       window.removeEventListener('resize', onWindowResize);
-      clearTimeout(autoRotateTimeout);
     };
   }, []);
 

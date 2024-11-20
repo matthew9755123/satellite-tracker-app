@@ -7,3 +7,10 @@ export const setGroup = (newGroup) => {
     console.log("Hello from config!!")
     group = newGroup;
 };
+
+let zoom;
+export const setZoom = (newZoom) => {
+    zoom = newZoom;
+};
+
+export const getZoom = () => zoom;
