@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import Earth from './Earth';
-import { SatelliteRenderer } from './Satellite_Renderer';
+import React, { useEffect } from "react";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import Earth from "./Earth";
+import { SatelliteRenderer } from "./Satellite_Renderer";
 
 function Scene() {
   useEffect(() => {
@@ -15,7 +15,7 @@ function Scene() {
     );
     camera.position.z = 2;
 
-    const canvas = document.getElementById('myThreeJsCanvas');
+    const canvas = document.getElementById("myThreeJsCanvas");
     const renderer = new THREE.WebGLRenderer({ canvas });
 
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,7 +35,6 @@ function Scene() {
 
     const earthMesh = Earth();
     earthGroup.add(earthMesh);
-    
 
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
     scene.add(ambientLight);
@@ -56,7 +55,7 @@ function Scene() {
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
-    window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener("resize", onWindowResize, false);
 
     const animate = () => {
       renderer.render(scene, camera);
@@ -67,11 +66,13 @@ function Scene() {
     animate();
 
     return () => {
-      window.removeEventListener('resize', onWindowResize);
+      window.removeEventListener("resize", onWindowResize);
     };
   }, []);
 
-  return <canvas id="myThreeJsCanvas" style={{ width: '100%', height: '100vh' }} />;
+  return (
+    <canvas id="myThreeJsCanvas" style={{ width: "100%", height: "100vh" }} />
+  );
 }
 
 export default Scene;
