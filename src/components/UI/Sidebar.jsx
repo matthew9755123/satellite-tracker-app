@@ -76,7 +76,8 @@ function Sidebar() {
 
   return (
     <div>
-      <div className="bg-gray-900 bg-opacity-80 rounded-lg absolute top-5 left-1/2 transform -translate-x-1/2 text-center text-white  px-5 py-2 rounded-lg shadow-lg text-6xl font-semibold">
+      <div className="bg-gray-900 bg-opacity-80 rounded-lg absolute top-5 left-1/2 transform -translate-x-1/2 
+      text-center text-white px-5 py-2 rounded-lg shadow-lg text-5xl font-semibold">
         SATELLITE TRACKER
       </div>
       <div className="sidebar h-screen w-[250px] fixed top-0 left-0 bg-gray-800 text-white overflow-y-auto py-5">
