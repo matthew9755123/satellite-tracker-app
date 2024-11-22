@@ -80,7 +80,7 @@ function Scene() {
   return (
     <>
       <canvas id="myThreeJsCanvas" style={{ width: "100%", height: "100vh" }} />
-      <div
+      <div className="text-blue-400 uppercase italic font-mono font-extrabold text-2xl"
         style={{
           position: "absolute",
           top: "10px",

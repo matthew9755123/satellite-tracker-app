@@ -47,8 +47,9 @@ export const SatelliteRenderer = (earthGroup) => {
   const material = new THREE.PointsMaterial({
     map: loader.load("assets/satellite-dot.png"),
     transparent: true,
-    size: 0.0275,
+    depthWrite: false,
     depthTest: true,
+    size: 0.0275,
   });
   const pointCloud = new THREE.Points(geometry, material);
   //pointCloud.frustumCulled = false;
