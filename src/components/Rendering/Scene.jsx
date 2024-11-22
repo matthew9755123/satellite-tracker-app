@@ -59,13 +59,12 @@ function Scene() {
     };
     window.addEventListener("resize", onWindowResize, false);
 
-    // FPS calculation
     let lastTime = 0;
     const animate = (time) => {
       const deltaTime = time - lastTime;
       lastTime = time;
       const fps = 1000 / deltaTime;
-      setFps(fps); // Set FPS state
+      setFps(fps);
 
       renderer.render(scene, camera);
       controls.update();

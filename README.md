@@ -28,7 +28,6 @@ A web-based satellite tracking tool using Three.js for 3D visualization and Cele
 * **Loading Screen/Bar:** Add a loading screen while the earth, satellites and TLE data is all gathered and rendered. 
 * **Interactive Satellite Information:** Enable satellite selection to display detailed information about each satellite.
 * **Earth Spin and Sun Brightness Controls:** Add controls to adjust the Earth’s rotation speed and the brightness of the sun.
-* **Orbital Heights:** Display satellites at varying altitudes according to their actual orbital heights instead of placing them all at the same level.
 ### **Aesthetic Enhancements**
 * **Enhanced Earth Model:** Adjust the Earth’s visual design for a more appealing look.
 * **UI Improvements:** Refine the interface to be more intuitive and visually attractive.
