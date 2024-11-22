@@ -47,17 +47,17 @@ export const SatelliteRenderer = (earthGroup) => {
   const material = new THREE.PointsMaterial({
     map: loader.load("assets/satellite-dot.png"),
     transparent: true,
-    size: 0.0175,
+    size: 0.0275,
     depthTest: true,
   });
   const pointCloud = new THREE.Points(geometry, material);
   //pointCloud.frustumCulled = false;
   geometry.computeBoundingSphere();
-  geometry.boundingSphere.radius *= 0.6;
+  geometry.boundingSphere.radius *= 0.3;
 
   earthGroup.add(pointCloud);
 
-  setInterval(() => updateSatellitePositions(), 500);
+  setInterval(() => updateSatellitePositions(), 1000);
 };
 
 const updateSatellitePositions = async () => {
@@ -69,7 +69,8 @@ const updateSatellitePositions = async () => {
     const latLonObj = getLatLngObj(tleData[satelliteId], now);
     if (latLonObj) {
       const { lat, lng } = latLonObj;
-      const newPosition = calcPosFromLatLonRad(lat, lng, 1.01);
+      const height = tleData[satelliteId].height ? parseFloat(tleData[satelliteId].height) : 0; // ternary operator, like an if else
+      const newPosition = calcPosFromLatLonRad(lat, lng, height);
 
       positions[i * 3] = newPosition[0];
       positions[i * 3 + 1] = newPosition[1];
@@ -80,6 +81,8 @@ const updateSatellitePositions = async () => {
 
   geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
   geometry.attributes.position.needsUpdate = true;
+
+
 };
 
 export default SatelliteRenderer;

@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Earth from "./Earth";
 import { SatelliteRenderer } from "./Satellite_Renderer";
 
 function Scene() {
+  const [fps, setFps] = useState(0);
+
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -26,7 +28,7 @@ function Scene() {
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
     controls.minDistance = 1.1;
-    controls.maxDistance = 10;
+    controls.maxDistance = 12.5;
     controls.enableDamping = true;
     controls.dampingFactor = 0.75;
 
@@ -57,13 +59,19 @@ function Scene() {
     };
     window.addEventListener("resize", onWindowResize, false);
 
-    const animate = () => {
+    // FPS calculation
+    let lastTime = 0;
+    const animate = (time) => {
+      const deltaTime = time - lastTime;
+      lastTime = time;
+      const fps = 1000 / deltaTime;
+      setFps(fps); // Set FPS state
+
       renderer.render(scene, camera);
-      earthGroup.rotation.y += 0.0;
       controls.update();
       requestAnimationFrame(animate);
     };
-    animate();
+    requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener("resize", onWindowResize);
@@ -71,7 +79,22 @@ function Scene() {
   }, []);
 
   return (
-    <canvas id="myThreeJsCanvas" style={{ width: "100%", height: "100vh" }} />
+    <>
+      <canvas id="myThreeJsCanvas" style={{ width: "100%", height: "100vh" }} />
+      <div
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          color: "white",
+          fontSize: "20px",
+          fontFamily: "Arial, sans-serif",
+          zIndex: 100,
+        }}
+      >
+        FPS: {fps.toFixed(2)}
+      </div>
+    </>
   );
 }
 
